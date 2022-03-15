@@ -1,4 +1,4 @@
-# To-Do List
+# Battleship Browser Game
 Thanks for checking out my take on the brtual game of naval warfare, 'Battleship'.
 ## About
 This project was completed as part of the ["Odin Project"](https://www.theodinproject.com/) curriculum.
