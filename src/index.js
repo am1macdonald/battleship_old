@@ -1,3 +1,4 @@
-const sinkShip = () => 'down she goes!';
-
-export default sinkShip;
+import './stylesheets/reset.css';
+import './stylesheets/style.sass';
+import './scripts/displayControls.js';
+import './scripts/game';

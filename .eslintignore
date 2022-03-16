@@ -7,4 +7,6 @@ webpack.config.js
 
 # ignore test files
 
-src/index.test.js
+src/scripts/tests
+
+src/scripts/factories/factory_tests
