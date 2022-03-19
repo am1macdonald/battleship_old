@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-prototype-builtins */
 import newShip from "./shipFactory";
 
 const newBoard = () => {
@@ -11,9 +9,8 @@ const newBoard = () => {
     destroyer: 2,
   };
   const shipyard = {};
-
-  const missedShots = [];
   const shipLocations = {};
+  const shots = [];
 
   function placeShip(name, start, end) {
     const temp = newShip(name, shipLengths[name], start, end);
@@ -32,22 +29,37 @@ const newBoard = () => {
 
   function recieveAttack(location) {
     const coords = location.join("-");
+    if (shots.includes(coords)) {
+      throw new Error("already shot here!");
+    }
+    shots.push(coords);
     if (shipLocations.hasOwnProperty(coords)) {
       const target = shipLocations[coords];
       shipyard[target].directHit(location);
+
       if (shipyard[target].isSunk() === true) {
         return "sunk";
       }
       return "hit";
     }
-    if (!missedShots.includes(coords)) {
-      missedShots.push(coords);
-      return "miss";
-    }
-    throw new Error("already shot here!");
+    return "miss";
   }
 
-  return { placeShip, recieveAttack };
+  function isFleetSunk() {
+    let allShipsSunk = true;
+    for (const key in shipyard) {
+      if (shipyard[key].isSunk() === false) {
+        allShipsSunk = false;
+      }
+    }
+    return allShipsSunk;
+  }
+
+  return {
+    placeShip,
+    recieveAttack,
+    isFleetSunk,
+  };
 };
 
 export default newBoard;

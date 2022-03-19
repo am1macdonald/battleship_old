@@ -38,3 +38,39 @@ it("returns 'hit' when a ship has been hit", () => {
 
   expect(gameboard.recieveAttack([2, 1])).toBe('hit');
 });
+
+it("returns an error when shooting the same place twice", () => {
+  const gameboard = newBoard();
+  gameboard.placeShip("destroyer", [2, 1], [2, 2]);
+  gameboard.recieveAttack([3, 1]);
+
+  expect(() => {
+    gameboard.recieveAttack([3, 1]);
+  }).toThrow();
+});
+
+it("returns an error when shooting the same place twice", () => {
+  const gameboard = newBoard();
+  gameboard.placeShip("destroyer", [2, 1], [2, 2]);
+  gameboard.recieveAttack([2, 1]);
+
+  expect(() => {
+    gameboard.recieveAttack([2, 1]);
+  }).toThrow();
+});
+
+it("reports when the fleet has been sunk", () => {
+  const gameboard = newBoard();
+  gameboard.placeShip("carrier", [2, 1], [2, 5]);
+  gameboard.recieveAttack([2, 1]);
+  gameboard.recieveAttack([2, 2]);
+  gameboard.recieveAttack([2, 3]);
+  gameboard.recieveAttack([2, 4]);
+  gameboard.recieveAttack([2, 5]);
+  gameboard.placeShip("destroyer", [3, 1], [3, 2]);
+  gameboard.recieveAttack([3, 1]);
+  gameboard.recieveAttack([3, 2]);
+
+  expect(gameboard.isFleetSunk()).toBe(true);
+  
+});
