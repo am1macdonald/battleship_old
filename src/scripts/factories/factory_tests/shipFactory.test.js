@@ -2,16 +2,16 @@ import newShip from "../shipFactory.js";
 
 // newShip tests
 test("returns an object", () => {
+  const bob = newShip('bob', 4, [2, 1], [2, 2]);
 
-  expect(typeof newShip())
-  .toBe("object");
+
+  expect(typeof bob).toBe("object");
 
 });
 
 
 test("returns ship with correct name", () => {
-
-  const bob = newShip('bob', 4);
+  const bob = newShip('bob', 4, [2, 1], [2, 2]);
 
   expect(bob.getName())
   .toBe('bob');
@@ -21,7 +21,7 @@ test("returns ship with correct name", () => {
 
 test("returns ship with correct spaces", () => {
 
-  expect(newShip(null, 4)
+  expect(newShip(null, 4, [2,1], [2, 4])
   .getLength())
   .toBe(4);
 
@@ -30,72 +30,38 @@ test("returns ship with correct spaces", () => {
 
 test("takes a hit", () => {
 
-  const bob = newShip("bob", 4, {
-    start: { x: 2, y: 2 },
-    end: { x: 5, y: 2 },
-  });
+  const bob = newShip("bob", 4, [2, 2], [2, 5]);
 
   expect(bob.directHit([2, 2]))
   .toMatchObject(
     {
-      1: {
-        coord: [2, 2],
-        hit: true
-      },
-      2: {
-        coord: [3, 2],
-        hit: false
-      },
-      3: {
-        coord: [4, 2],
-        hit: false
-      },
-      4: {
-        coord: [5, 2],
-        hit: false
-      },
-    
+      '2-2': true,
+      '2-3': false,
+      '2-4': false,
+      '2-5': false,    
     }
   )
 });
 
 test("takes another hit", () => {
 
-  const bob = newShip("bob", 4, {
-    start: { x: 2, y: 2 },
-    end: { x: 5, y: 2 },
-  });
+  const bob = newShip("bob", 4, [2, 2], [2, 5]);
 
-  expect(bob.directHit([5, 2]))
+  expect(bob.directHit([2, 5]))
   .toMatchObject(
+
     {
-      1: {
-        coord: [2, 2],
-        hit: false
-      },
-      2: {
-        coord: [3, 2],
-        hit: false
-      },
-      3: {
-        coord: [4, 2],
-        hit: false
-      },
-      4: {
-        coord: [5, 2],
-        hit: true
-      },
-    
+      '2-2': false,
+      '2-3': false,
+      '2-4': false,
+      '2-5': true,    
     }
   )
 });
 
 test("ship sinks", () => {
 
-  const bob = newShip("bob", 1, {
-    start: { x: 2, y: 2 },
-    end: { x: 2, y: 2 },
-  });
+  const bob = newShip("bob", 1, [2, 2], [2, 2]);
 
   bob.directHit([2, 2]);
 
@@ -103,12 +69,21 @@ test("ship sinks", () => {
 
 });
 
-test.only("ship sinks after multiple hits ", () => {
+test("ship doesn't sink after until enough hits ", () => {
 
-  const bob = newShip("bob", 4, {
-    start: { x: 2, y: 2 },
-    end: { x: 2, y: 5 },
-  });
+  const bob = newShip("bob", 4, [2, 2], [2, 5]);
+
+  bob.directHit([2, 2]);
+  bob.directHit([2, 3]);
+  bob.directHit([2, 5]);
+
+  expect(bob.isSunk()).toBe(false)
+
+});
+
+test("ship sinks after multiple hits ", () => {
+
+  const bob = newShip("bob", 4, [2, 2], [2, 5]);
 
   bob.directHit([2, 2]);
   bob.directHit([2, 3]);

@@ -1,7 +1,16 @@
-const newShip = (str, num, position) => {
+const newShip = (str, num, front, rear) => {
   const name = str;
   const length = num;
-  const coords = position;
+  const coords = {
+    start: {
+      x: front[0],
+      y: front[1],
+    },
+    end: {
+      x: rear[0],
+      y: rear[1],
+    },
+  };
   let sunk = false;
   const hitMap = {};
 
@@ -13,9 +22,6 @@ const newShip = (str, num, position) => {
     return length;
   };
 
-  const getHitMap = () => {
-    return hitMap;
-  };
   const isSunk = () => {
     return sunk;
   };
@@ -26,30 +32,26 @@ const newShip = (str, num, position) => {
       return;
     }
     if (coords.start.x === coords.end.x) {
-      const constantAxis = coords.start.x;
-      const start = coords.start.y;
+      const constant = coords.start.x;
+      const start =
+        coords.start.y <= coords.end.y ? coords.start.y : coords.end.y;
       for (let i = 0; i < length; i += 1) {
-        hitMap[i + 1] = {
-          coord: [constantAxis, start + i],
-          hit: false,
-        };
+        hitMap[`${constant}-${start + i}`] = false;
       }
     } else if (coords.start.y === coords.end.y) {
-      const constantAxis = coords.start.y;
-      const start = coords.start.x;
+      const constant = coords.start.y;
+      const start =
+        coords.start.x <= coords.end.x ? coords.start.x : coords.end.x;
       for (let i = 0; i < length; i += 1) {
-        hitMap[i + 1] = {
-          coord: [start + i, constantAxis],
-          hit: false,
-        };
+        hitMap[`${start + i}-${constant}`] = false;
       }
     }
   })();
 
   const checkHull = () => {
     let status = true;
-    for (const hitMapLocation in hitMap) {
-      if (hitMap[hitMapLocation].hit === false) {
+    for (const key in hitMap) {
+      if (hitMap[key] === false) {
         status = false;
       }
     }
@@ -62,15 +64,13 @@ const newShip = (str, num, position) => {
       throw new Error("already down");
     }
 
-    for (const hitMapLocation in hitMap) {
-      if (
-        hitMap[hitMapLocation].coord[0] === hitLocation[0] &&
-        hitMap[hitMapLocation].coord[1] === hitLocation[1]
-      ) {
-        hitMap[hitMapLocation].hit = true;
+    for (const key in hitMap) {
+      if (key === hitLocation.join("-")) {
+        hitMap[key] = true;
       }
     }
     checkHull();
+
     return hitMap;
   };
 
@@ -79,16 +79,8 @@ const newShip = (str, num, position) => {
     getLength,
     directHit,
     isSunk,
+    hitMap,
   };
 };
-
-const bob = newShip("bob", 2, {
-  start: { x: 2, y: 2 },
-  end: { x: 2, y: 3 },
-});
-
-console.log(bob.directHit([2, 2]));
-console.log(bob.directHit([2, 3]));
-console.log(bob.isSunk());
 
 export default newShip;
