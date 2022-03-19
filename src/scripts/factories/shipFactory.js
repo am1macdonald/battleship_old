@@ -14,6 +14,10 @@ const newShip = (str, num, front, rear) => {
   let sunk = false;
   const hitMap = {};
 
+  const getHitMap = () => {
+    return hitMap;
+  };
+
   const getName = () => {
     return name;
   };
@@ -45,6 +49,8 @@ const newShip = (str, num, front, rear) => {
       for (let i = 0; i < length; i += 1) {
         hitMap[`${start + i}-${constant}`] = false;
       }
+    } else {
+      throw new Error("no diagonal!");
     }
   })();
 
@@ -79,7 +85,7 @@ const newShip = (str, num, front, rear) => {
     getLength,
     directHit,
     isSunk,
-    hitMap,
+    getHitMap,
   };
 };
 
