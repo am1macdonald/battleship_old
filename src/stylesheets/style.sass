@@ -1,6 +1,7 @@
 $orange: #C06014
 $dark-grey: #1E201E
 $steel-grey: #536162
+$softer-grey: #b6c9ca
 $off-white: #F3F4ED
 $blue: #86BBD8
 
@@ -9,15 +10,15 @@ $blue: #86BBD8
   box-sizing: border-box
 
 body
-  height: 100vh
   width: 100vw
+  height: 100vh
 
   background-color: $off-white
   color:$dark-grey
 
 nav
-  height: 10vh
   width: 100vw
+  height: 10vh
   display: flex
   justify-content: center
   align-items: center
@@ -25,12 +26,12 @@ nav
     font-size: 3rem
 
 main
-  height: 85vh
   width: 100vw
+  height: 85vh
 
 footer
-  height: 5vh
   width: 100vw
+  height: 5vh
 
 // classes
 
@@ -40,8 +41,32 @@ footer
   display: flex
   justify-content: center
   align-items: center
-  height: 100vh
   width: 100vw
+  height: 100vh
+
+
+.form-container
+  width: 30vw
+  height: 20vh
+
+  background-color: $softer-grey
+
+
+
 
 // id
 
+#player-information
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+  align-items: center
+  width: inherit
+  height: inherit
+
+  div
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: inherit
