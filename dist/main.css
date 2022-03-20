@@ -134,6 +134,66 @@ table {
 /*!*********************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/stylesheets/style.sass ***!
   \*********************************************************************************************************************/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #F3F4ED;
+  color: #1E201E;
+}
+
+nav {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 nav div {
   font-size: 3rem;
+}
+
+main {
+  width: 100vw;
+  height: 85vh;
+}
+
+footer {
+  width: 100vw;
+  height: 5vh;
+}
+
+.form-overlay {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.form-container {
+  width: 30vw;
+  height: 20vh;
+  background-color: #b6c9ca;
+}
+
+#player-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+}
+#player-information div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
 }
