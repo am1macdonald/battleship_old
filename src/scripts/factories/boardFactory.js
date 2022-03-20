@@ -12,6 +12,10 @@ const newBoard = () => {
   const shipLocations = {};
   const shots = [];
 
+  const getShots = () => {
+    return shots;
+  };
+
   function placeShip(name, start, end) {
     const temp = newShip(name, shipLengths[name], start, end);
     const map = temp.getHitMap();
@@ -59,6 +63,7 @@ const newBoard = () => {
     placeShip,
     recieveAttack,
     isFleetSunk,
+    getShots,
   };
 };
 
