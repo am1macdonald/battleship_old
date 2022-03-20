@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _stylesheets_reset_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/reset.css */ \"./src/stylesheets/reset.css\");\n/* harmony import */ var _stylesheets_style_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stylesheets/style.sass */ \"./src/stylesheets/style.sass\");\n\n\n\n//# sourceURL=webpack://my-webpack-project/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _stylesheets_reset_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/reset.css */ \"./src/stylesheets/reset.css\");\n/* harmony import */ var _stylesheets_style_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stylesheets/style.sass */ \"./src/stylesheets/style.sass\");\n/* harmony import */ var _assets_sakura_LHf_WzBYpo_unsplash_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/sakura-_LHf-WzBYpo-unsplash.jpg */ \"./src/assets/sakura-_LHf-WzBYpo-unsplash.jpg\");\n\n\n\n\n//# sourceURL=webpack://my-webpack-project/./src/index.js?");
 
 /***/ }),
 
@@ -37,6 +37,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://my-webpack-project/./src/stylesheets/reset.css?");
+
+/***/ }),
+
+/***/ "./src/assets/sakura-_LHf-WzBYpo-unsplash.jpg":
+/*!****************************************************!*\
+  !*** ./src/assets/sakura-_LHf-WzBYpo-unsplash.jpg ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"9c16fd44d583c863a460.jpg\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/sakura-_LHf-WzBYpo-unsplash.jpg?");
 
 /***/ })
 
@@ -67,6 +77,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -76,6 +98,26 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

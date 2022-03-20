@@ -42,4 +42,22 @@ const playerDataEntry = () => {
   body.appendChild(overlay);
 };
 
-export { playerDataEntry };
+const renderBoard = () => {
+  const container = document.createElement("div");
+  container.classList.add("gameboard-container");
+  const board = document.createElement("div");
+  board.classList.add("gameboard");
+
+  for (let y = 10; y >= 1; y -= 1) {
+    for (let i = 1; i <= 10; i += 1) {
+      const square = document.createElement("div");
+      square.dataset.coord = `${i}-${y}`;
+      board.appendChild(square);
+    }
+  }
+
+  container.appendChild(board);
+  content.appendChild(container);
+};
+
+export { playerDataEntry, renderBoard };
