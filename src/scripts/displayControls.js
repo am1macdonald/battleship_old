@@ -23,12 +23,14 @@ const playerDataEntry = () => {
   label.innerHTML = "Enter Your Name";
   const textInput = document.createElement("input");
   textInput.id = "player-name";
+  textInput.required = true;
 
   inputDiv.appendChild(label);
   inputDiv.appendChild(textInput);
 
   const buttonDiv = document.createElement("div");
   const button = document.createElement("button");
+  button.id = "start-button";
   button.innerHTML = "start";
 
   buttonDiv.appendChild(button);
@@ -40,9 +42,11 @@ const playerDataEntry = () => {
   container.appendChild(form);
   overlay.appendChild(container);
   body.appendChild(overlay);
+
+  return { overlay, form };
 };
 
-const renderBoard = () => {
+const renderBoard = (parent) => {
   const container = document.createElement("div");
   container.classList.add("gameboard-container");
   const board = document.createElement("div");
@@ -52,12 +56,55 @@ const renderBoard = () => {
     for (let i = 1; i <= 10; i += 1) {
       const square = document.createElement("div");
       square.dataset.coord = `${i}-${y}`;
+      square.addEventListener("click", () => {
+        console.log(square.parentElement.dataset.owner);
+        return {
+          owner: square.parentElement.dataset.owner,
+          coord: square.dataset.coord,
+        };
+      });
       board.appendChild(square);
     }
   }
 
   container.appendChild(board);
-  content.appendChild(container);
+  parent.appendChild(container);
+
+  return board;
 };
 
-export { playerDataEntry, renderBoard };
+const gameArea = (playerOneName, playerTwoName) => {
+  const container = document.createElement("div");
+  container.id = "game-area";
+
+  const playerOneSide = document.createElement("div");
+  playerOneSide.id = "player-one-side";
+  const playerOneTitle = document.createElement("h2");
+  playerOneTitle.innerHTML = playerOneName;
+  playerOneSide.appendChild(playerOneTitle);
+  const playerOneBoard = renderBoard(playerOneSide);
+  playerOneBoard.dataset.owner = playerOneName;
+
+  const playerTwoSide = document.createElement("div");
+  playerTwoSide.id = "player-two-side";
+  const playerTwoTitle = document.createElement("h2");
+  playerTwoTitle.innerHTML = playerTwoName;
+  playerTwoSide.appendChild(playerTwoTitle);
+  const playerTwoBoard = renderBoard(playerTwoSide);
+  playerTwoBoard.dataset.owner = playerTwoName;
+
+  container.appendChild(playerOneSide);
+  container.appendChild(playerTwoSide);
+
+  content.appendChild(container);
+
+  return {
+    container,
+    playerOneSide,
+    playerTwoSide,
+    playerOneBoard,
+    playerTwoBoard,
+  };
+};
+
+export { playerDataEntry, renderBoard, gameArea };

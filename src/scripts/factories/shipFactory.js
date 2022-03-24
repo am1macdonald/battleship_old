@@ -1,14 +1,17 @@
 const newShip = (str, num, front, rear) => {
   const name = str;
   const length = num;
+  const splitAndParse = (str) => {
+    return [parseInt(str.split("-")[0], 10), parseInt(str.split("-")[1], 10)];
+  };
   const coords = {
     start: {
-      x: front[0],
-      y: front[1],
+      x: splitAndParse(front)[0],
+      y: splitAndParse(front)[1],
     },
     end: {
-      x: rear[0],
-      y: rear[1],
+      x: splitAndParse(rear)[0],
+      y: splitAndParse(rear)[1],
     },
   };
   let sunk = false;
@@ -66,12 +69,14 @@ const newShip = (str, num, front, rear) => {
   };
 
   const directHit = (hitLocation) => {
+    const hit =
+      typeof hitLocation === "object" ? hitLocation.join("-") : hitLocation;
     if (sunk === true) {
       throw new Error("already down");
     }
 
     for (const key in hitMap) {
-      if (key === hitLocation.join("-")) {
+      if (key === hit) {
         hitMap[key] = true;
       }
     }

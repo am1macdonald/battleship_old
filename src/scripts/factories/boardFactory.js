@@ -1,6 +1,6 @@
 import newShip from "./shipFactory";
 
-const newBoard = () => {
+const newBoard = (ownerName) => {
   const shipLengths = {
     carrier: 5,
     battleship: 4,
@@ -11,6 +11,15 @@ const newBoard = () => {
   const shipyard = {};
   const shipLocations = {};
   const shots = [];
+  const owner = ownerName;
+
+  const getShipLocations = () => {
+    return shipLocations;
+  };
+
+  const getOwnerName = () => {
+    return owner;
+  };
 
   const getShots = () => {
     return shots;
@@ -32,7 +41,10 @@ const newBoard = () => {
   }
 
   function recieveAttack(location) {
-    const coords = location.join("-");
+    let coords = location;
+    if (typeof location === "object") {
+      coords = location.join("-");
+    }
     if (shots.includes(coords)) {
       throw new Error("already shot here!");
     }
@@ -64,6 +76,8 @@ const newBoard = () => {
     recieveAttack,
     isFleetSunk,
     getShots,
+    getOwnerName,
+    getShipLocations,
   };
 };
 

@@ -1,3 +1,5 @@
+import newBoard from "./boardFactory";
+
 const player = (name) => {
   const playerName = name;
   let turn = false;
@@ -19,6 +21,13 @@ const player = (name) => {
 };
 
 const computerMover = () => {
+  const placedShips = {
+    carrier: 5,
+    battleship: 4,
+    cruiser: 3,
+    submarine: 3,
+    destroyer: 2,
+  };
   const makeOwnChoices = (board) => {
     const coord = `${Math.floor(Math.random() * 10) + 1}-${
       Math.floor(Math.random() * 10) + 1
@@ -29,7 +38,13 @@ const computerMover = () => {
     return coord;
   };
 
-  return { makeOwnChoices };
+  const placeOwnShips = (board) => {};
+
+  return { makeOwnChoices, placeOwnShips };
 };
+
+// const computer = Object.assign(player("computer"), computerMover());
+// const computerBoard = newBoard("computer");
+// computer.placeOwnShips(computerBoard);
 
 export { player, computerMover };
