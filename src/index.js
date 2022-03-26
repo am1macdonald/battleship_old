@@ -1,10 +1,8 @@
 import "./stylesheets/reset.css";
 import "./stylesheets/style.sass";
 import "./assets/sakura-_LHf-WzBYpo-unsplash.jpg";
-import { gameArea, playerDataEntry } from "./scripts/displayControls";
+import { gameArea, playerDataEntry, shipDrawer } from "./scripts/DOMControls";
 import newGame from "./scripts/factories/gameFactory";
-
-let game;
 
 const onLoad = (() => {
   const dataEntry = playerDataEntry();
@@ -19,6 +17,7 @@ const onLoad = (() => {
     console.log(game);
 
     const newGameArea = gameArea(playerName.value, "Computer Player");
+    shipDrawer();
     dataEntry.overlay.remove();
   });
 })();
