@@ -20,8 +20,19 @@ const newGame = (playerOneName, playerTwoName) => {
   };
   const nextState = () => {
     if (state === "setup") {
+      state = "gameplay";
     }
     return state;
+  };
+
+  const eventManager = () => {};
+
+  const next = () => {
+    if (state === "setup") {
+      // do something
+    } else if (state === "gameplay") {
+      // do something different
+    }
   };
   return {
     playerOne,
@@ -29,6 +40,7 @@ const newGame = (playerOneName, playerTwoName) => {
     playerOneBoard,
     playerTwoBoard,
     toggleTurn,
+    next,
   };
 };
 
