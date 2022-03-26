@@ -1,12 +1,15 @@
+import { gameArea } from "./DOMControls";
+import newGame from "./factories/gameFactory";
+
+const bindListeners = () => {
+  console.log("stuff");
+};
+
 let game;
 
-const stateManager = () => {};
-const eventManager = (() => {
-  const next = (e) => {
-    console.log(e);
-  };
+const startGame = (playerOneName, playerTwoName = null) => {
+  gameArea(playerOneName, "Computer Player");
+  game = newGame(playerOneName, playerTwoName);
+};
 
-  return { next };
-})();
-
-export { eventManager };
+export default startGame;
