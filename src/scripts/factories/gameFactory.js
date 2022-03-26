@@ -2,6 +2,8 @@ import newBoard from "./boardFactory";
 import { computerMover, player } from "./playerFactory";
 
 const newGame = (playerOneName, playerTwoName) => {
+  const state = "setup";
+
   const playerOne = playerOneName ? player(playerOneName) : null;
   const playerTwo = playerTwoName
     ? player(playerTwoName)
@@ -15,6 +17,11 @@ const newGame = (playerOneName, playerTwoName) => {
     } else {
       turn = "playerOne";
     }
+  };
+  const nextState = () => {
+    if (state === "setup") {
+    }
+    return state;
   };
   return {
     playerOne,

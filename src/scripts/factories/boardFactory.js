@@ -70,6 +70,10 @@ const newBoard = (ownerName) => {
     }
     return allShipsSunk;
   }
+  function nextShip() {
+    for (const key in shipLengths) {
+    }
+  }
 
   return {
     placeShip,
@@ -78,6 +82,7 @@ const newBoard = (ownerName) => {
     getShots,
     getOwnerName,
     getShipLocations,
+    nextShip,
   };
 };
 
