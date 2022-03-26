@@ -72,7 +72,11 @@ const newBoard = (ownerName) => {
   }
   function nextShip() {
     for (const key in shipLengths) {
+      if (!shipyard.hasOwnProperty(key)) {
+        return key;
+      }
     }
+    return "setup complete";
   }
 
   return {
@@ -85,5 +89,14 @@ const newBoard = (ownerName) => {
     nextShip,
   };
 };
+
+// const bobsBoard = newBoard("bob");
+// bobsBoard.placeShip("carrier", "1-1", "1-5");
+// bobsBoard.placeShip("battleship", "2-1", "2-4");
+// bobsBoard.placeShip("cruiser", "3-2", "3-4");
+// bobsBoard.placeShip("submarine", "4-1", "4-3");
+// bobsBoard.placeShip("destroyer", "6-2", "6-3");
+
+// bobsBoard.nextShip();
 
 export default newBoard;
