@@ -2,7 +2,7 @@ import newShip from "../shipFactory.js";
 
 // newShip tests
 test("returns an object", () => {
-  const bob = newShip('bob', 4, [2, 1], [2, 2]);
+  const bob = newShip('bob', 4, '2-1', '2-2');
 
 
   expect(typeof bob).toBe("object");
@@ -11,7 +11,7 @@ test("returns an object", () => {
 
 
 test("returns ship with correct name", () => {
-  const bob = newShip('bob', 4, [2, 1], [2, 2]);
+  const bob = newShip('bob', 4, '2-1', '2-2');
 
   expect(bob.getName())
   .toBe('bob');
@@ -21,7 +21,7 @@ test("returns ship with correct name", () => {
 
 test("returns ship with correct spaces", () => {
 
-  expect(newShip(null, 4, [2,1], [2, 4])
+  expect(newShip(null, 4, '2-1', '2-4')
   .getLength())
   .toBe(4);
 
@@ -30,7 +30,7 @@ test("returns ship with correct spaces", () => {
 
 test("takes a hit", () => {
 
-  const bob = newShip("bob", 4, [2, 2], [2, 5]);
+  const bob = newShip("bob", 4, '2-2', '2-5');
 
   expect(bob.directHit([2, 2]))
   .toMatchObject(
@@ -45,7 +45,7 @@ test("takes a hit", () => {
 
 test("takes another hit", () => {
 
-  const bob = newShip("bob", 4, [2, 2], [2, 5]);
+  const bob = newShip("bob", 4, '2-2', '2-5');
 
   expect(bob.directHit([2, 5]))
   .toMatchObject(
@@ -61,7 +61,7 @@ test("takes another hit", () => {
 
 test("ship sinks", () => {
 
-  const bob = newShip("bob", 1, [2, 2], [2, 2]);
+  const bob = newShip("bob", 1, '2-2', '2-2');
 
   bob.directHit([2, 2]);
 
@@ -71,7 +71,7 @@ test("ship sinks", () => {
 
 test("ship doesn't sink after until enough hits ", () => {
 
-  const bob = newShip("bob", 4, [2, 2], [2, 5]);
+  const bob = newShip("bob", 4, '2-2', '2-5');
 
   bob.directHit([2, 2]);
   bob.directHit([2, 3]);
@@ -83,7 +83,7 @@ test("ship doesn't sink after until enough hits ", () => {
 
 test("ship sinks after multiple hits ", () => {
 
-  const bob = newShip("bob", 4, [2, 2], [2, 5]);
+  const bob = newShip("bob", 4, '2-2', '2-5');
 
   bob.directHit([2, 2]);
   bob.directHit([2, 3]);
