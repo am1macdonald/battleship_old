@@ -18,9 +18,9 @@ const newGame = (playerOneName, playerTwoName) => {
       turn = "playerOne";
     }
   };
-  const nextState = () => {
-    if (state === "setup") {
-      state = "gameplay";
+  const nextGameStage = () => {
+    if (stage === "setup") {
+      stage = "gameplay";
     }
     return state;
   };
