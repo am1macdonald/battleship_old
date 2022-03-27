@@ -8,7 +8,11 @@ const newGame = (playerOneName, playerTwoName) => {
   };
   const nextGameStage = () => {
     if (stage === "setup") {
-      stage = "gameplay";
+      if (
+        playerOneBoard.nextShip() === "setup complete" &&
+        playerTwoBoard.nextShip() === "setup complete"
+      )
+        stage = "gameplay";
     }
     return stage;
   };
@@ -43,7 +47,7 @@ const newGame = (playerOneName, playerTwoName) => {
       }
       if (curryTemp !== undefined) {
         try {
-          curryTemp(data.coord);
+          console.log(curryTemp(data.coord));
           curryTemp = undefined;
           return;
         } catch (error) {
@@ -58,9 +62,9 @@ const newGame = (playerOneName, playerTwoName) => {
   };
 
   const next = () => {
-    if (state === "setup") {
+    if (stage === "setup") {
       // do something
-    } else if (state === "gameplay") {
+    } else if (stage === "gameplay") {
       // do something different
     }
   };
