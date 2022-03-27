@@ -182,9 +182,18 @@ footer {
   background-color: #b6c9ca;
 }
 
+.player-half {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  width: 50vw;
+  height: 85vh;
+}
+
 .gameboard-container {
   width: 100%;
-  height: inherit;
+  height: auto;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -228,8 +237,9 @@ footer {
 
 #ship-drawer {
   display: grid;
-  grid-template-columns: repeat(5, 10%);
+  grid-template-columns: repeat(5, 1fr);
   height: 10vw;
+  width: 100%;
 }
 #ship-drawer > * {
   align-self: center;

@@ -1,25 +1,23 @@
 import "./stylesheets/reset.css";
 import "./stylesheets/style.sass";
 import "./assets/sakura-_LHf-WzBYpo-unsplash.jpg";
-import { gameArea, playerDataEntry, shipDrawer } from "./scripts/DOMControls";
-import newGame from "./scripts/factories/gameFactory";
+import { playerDataEntry } from "./scripts/DOMControls";
+import startGame from "./scripts/gameLoop";
 
 const onLoad = (() => {
   const dataEntry = playerDataEntry();
-  const playerName = document.getElementById("player-name");
-  const startButton = document.getElementById("start-button");
-  startButton.addEventListener("click", (e) => {
+  const input = dataEntry.textInput;
+  function handleClick(e) {
     e.preventDefault();
     if (!dataEntry.form.checkValidity()) {
       return;
     }
-    game = newGame(playerName.value, null);
-    console.log(game);
-
-    const newGameArea = gameArea(playerName.value, "Computer Player");
-    shipDrawer();
+    startGame(input.value);
     dataEntry.overlay.remove();
-  });
+    e.target.removeEventListener("click", handleClick);
+  }
+
+  dataEntry.button.addEventListener("click", handleClick);
 })();
 
 // game = newGame("joe", null);
