@@ -37,7 +37,7 @@ const newBoard = (ownerName) => {
     for (const key in map) {
       shipLocations[key] = name;
     }
-    return shipyard;
+    return map;
   }
 
   function recieveAttack(location) {
