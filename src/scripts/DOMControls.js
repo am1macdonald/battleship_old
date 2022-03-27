@@ -97,6 +97,10 @@ const gameArea = (playerOneName, playerTwoName) => {
   const playerOneBoard = renderBoard(playerOneSide);
   playerOneBoard.dataset.owner = playerOneName;
   shipDrawer(playerOneSide);
+  const playerOneReady = document.createElement("button");
+  playerOneReady.innerHTML = "READY";
+  playerOneReady.id = "player-one-ready";
+  playerOneSide.appendChild(playerOneReady);
 
   const playerTwoSide = document.createElement("div");
   playerTwoSide.id = "player-two-side";
@@ -119,6 +123,10 @@ const gameArea = (playerOneName, playerTwoName) => {
     playerOneBoard,
     playerTwoBoard,
   };
+};
+
+const renderShip = (coords) => {
+  console.log(Object.keys(coords));
 };
 
 export { playerDataEntry, renderBoard, gameArea, shipDrawer };

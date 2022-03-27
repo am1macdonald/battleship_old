@@ -1,4 +1,4 @@
-import { gameArea } from "./DOMControls";
+import { gameArea, playerDataEntry } from "./DOMControls";
 import newGame from "./factories/gameFactory";
 
 let game;
@@ -40,6 +40,12 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
     });
     console.log("player attack selection bound");
   }
+  const playerOneready = document.getElementById("player-one-ready");
+  playerOneready.addEventListener("click", () => {
+    if (game.nextGameStage() === "gameplay") {
+      console.log("ready");
+    } else console.log("finish placing ships");
+  });
 };
 
 const startGame = (playerOneName, playerTwoName = null) => {
