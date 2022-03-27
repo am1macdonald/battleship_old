@@ -43,7 +43,7 @@ const playerDataEntry = () => {
   overlay.appendChild(container);
   body.appendChild(overlay);
 
-  return { overlay, form };
+  return { overlay, form, textInput, button };
 };
 
 const renderBoard = (parent) => {
@@ -56,13 +56,6 @@ const renderBoard = (parent) => {
     for (let i = 1; i <= 10; i += 1) {
       const square = document.createElement("div");
       square.dataset.coord = `${i}-${y}`;
-      square.addEventListener("click", () => {
-        console.log(square.parentElement.dataset.owner);
-        return {
-          owner: square.parentElement.dataset.owner,
-          coord: square.dataset.coord,
-        };
-      });
       board.appendChild(square);
     }
   }
@@ -73,23 +66,22 @@ const renderBoard = (parent) => {
   return board;
 };
 
-const shipDrawer = () => {
+const shipDrawer = (parent) => {
   const ships = ["carrier", "battleship", "cruiser", "submarine", "destroyer"];
   const container = document.createElement("div");
   container.id = "ship-drawer";
 
-  ships.forEach((ship) => {
+  ships.map((ship) => {
     const shipDiv = document.createElement("div");
     shipDiv.id = `${ship}-selection`;
     shipDiv.dataset.ship = `${ship}`;
     shipDiv.innerHTML = `${ship}`;
     container.appendChild(shipDiv);
-    console.log(ship);
   });
 
-  content.appendChild(container);
-
-  return { container };
+  parent.appendChild(container);
+  const childRefs = [...container.children];
+  return { container, childRefs };
 };
 
 const gameArea = (playerOneName, playerTwoName) => {
@@ -98,14 +90,17 @@ const gameArea = (playerOneName, playerTwoName) => {
 
   const playerOneSide = document.createElement("div");
   playerOneSide.id = "player-one-side";
+  playerOneSide.classList.add("player-half");
   const playerOneTitle = document.createElement("h2");
   playerOneTitle.innerHTML = playerOneName;
   playerOneSide.appendChild(playerOneTitle);
   const playerOneBoard = renderBoard(playerOneSide);
   playerOneBoard.dataset.owner = playerOneName;
+  shipDrawer(playerOneSide);
 
   const playerTwoSide = document.createElement("div");
   playerTwoSide.id = "player-two-side";
+  playerTwoSide.classList.add("player-half");
   const playerTwoTitle = document.createElement("h2");
   playerTwoTitle.innerHTML = playerTwoName;
   playerTwoSide.appendChild(playerTwoTitle);
