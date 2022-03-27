@@ -2,7 +2,16 @@ import newBoard from "./boardFactory";
 import { computerMover, player } from "./playerFactory";
 
 const newGame = (playerOneName, playerTwoName) => {
-  const state = "setup";
+  let stage = "setup";
+  const getStage = () => {
+    return stage;
+  };
+  const nextGameStage = () => {
+    if (stage === "setup") {
+      stage = "gameplay";
+    }
+    return stage;
+  };
 
   const playerOne = playerOneName ? player(playerOneName) : null;
   const playerTwo = playerTwoName
@@ -18,14 +27,39 @@ const newGame = (playerOneName, playerTwoName) => {
       turn = "playerOne";
     }
   };
-  const nextGameStage = () => {
-    if (stage === "setup") {
-      stage = "gameplay";
-    }
-    return state;
-  };
 
-  const eventManager = () => {};
+  let curryTemp;
+  const setupCurry = (coordOne, board) => {
+    return function (coordTwo) {
+      const result = board.placeShip(board.nextShip(), coordOne, coordTwo);
+      console.log(result)
+    }
+  }
+  const eventManager = (data) => {
+    if (stage ==='setup') {
+      if (playerOneBoard.nextShip() === 'setup complete') {
+        nextGameStage();
+        return;
+      }
+      if (curryTemp !== undefined) {
+        try {
+          curryTemp(data.coord)
+          curryTemp = undefined
+          return;
+        }
+        catch(error) {
+          console.log(error)
+          curryTemp = undefined
+          return;
+        }
+
+      } 
+      curryTemp = setupCurry(data.coord, playerOneBoard)
+      console.log(curryTemp);
+      
+      
+    }
+  };
 
   const next = () => {
     if (state === "setup") {
@@ -41,6 +75,9 @@ const newGame = (playerOneName, playerTwoName) => {
     playerTwoBoard,
     toggleTurn,
     next,
+    getStage,
+    nextGameStage,
+    eventManager
   };
 };
 
