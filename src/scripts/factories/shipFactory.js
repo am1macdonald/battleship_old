@@ -43,7 +43,7 @@ const newShip = (shipName, num, front, rear) => {
       const start =
         coords.start.y <= coords.end.y ? coords.start.y : coords.end.y;
       if (start + length > 10) {
-        throw new Error('no room to place!')
+        throw new Error("no room to place!");
       }
       for (let i = 0; i < length; i += 1) {
         hitMap[`${constant}-${start + i}`] = false;
@@ -52,9 +52,9 @@ const newShip = (shipName, num, front, rear) => {
       const constant = coords.start.y;
       const start =
         coords.start.x <= coords.end.x ? coords.start.x : coords.end.x;
-        if (start + length > 10) {
-          throw new Error('no room to place!')
-        }
+      if (start + length > 10) {
+        throw new Error("no room to place!");
+      }
       for (let i = 0; i < length; i += 1) {
         hitMap[`${start + i}-${constant}`] = false;
       }

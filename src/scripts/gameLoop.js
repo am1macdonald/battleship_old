@@ -3,7 +3,6 @@ import newGame from "./factories/gameFactory";
 
 let game;
 
-
 // only useful until two player games are possible
 const bindListeners = (playerOneName, playerTwoName = null) => {
   const playerOneSquares = [
@@ -15,7 +14,6 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
     ...document.querySelector('[data-owner="Player Two"]').children,
   ];
 
-
   // binds event listeners for player ship setup
   if (game.getStage() === "setup") {
     playerOneSquares.forEach((square) => {
@@ -24,11 +22,10 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
           owner: square.parentElement.dataset.owner,
           coord: square.dataset.coord,
         };
-        game.eventManager(data)
+        game.eventManager(data);
       });
     });
     console.log("player selection bound");
-
 
     // binds event listeners for player to make attacks
   } else if (game.getStage() === "gameplay") {
@@ -38,7 +35,7 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
           owner: square.parentElement.dataset.owner,
           coord: square.dataset.coord,
         };
-        game.eventManager(data)
+        game.eventManager(data);
       });
     });
     console.log("player attack selection bound");
