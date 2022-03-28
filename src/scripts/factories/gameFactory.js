@@ -23,6 +23,10 @@ const newGame = (playerOneName, playerTwoName) => {
     : Object.assign(player("Computer Player"), computerMover());
   const playerOneBoard = newBoard(playerOne);
   const playerTwoBoard = newBoard(playerTwo);
+
+  if (playerTwo.getName() === "Computer Player") {
+    playerTwo.randomlyPlaceShips(playerTwoBoard);
+  }
   let turn = "playerOne";
   const toggleTurn = () => {
     if (turn === "playerOne") {
