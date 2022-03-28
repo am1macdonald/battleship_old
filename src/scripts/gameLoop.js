@@ -42,8 +42,9 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
   }
   const playerOneready = document.getElementById("player-one-ready");
   playerOneready.addEventListener("click", () => {
-    if (game.nextGameStage() === "gameplay") {
-      console.log("ready");
+    const result = game.nextGameStage();
+    if (result === "gameplay") {
+      console.log(result);
     } else console.log("finish placing ships");
   });
 };
