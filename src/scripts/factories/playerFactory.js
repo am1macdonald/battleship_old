@@ -30,10 +30,14 @@ const computerMover = () => {
   };
 
   const randomlyPlaceShips = (board) => {
-    board.placeShip();
+    board.placeShip("carrier", "1-1", "1-5");
+    board.placeShip("battleship", "2-1", "2-4");
+    board.placeShip("cruiser", "3-2", "3-4");
+    board.placeShip("submarine", "4-1", "4-3");
+    board.placeShip("destroyer", "6-2", "6-3");
   };
 
-  return { makeOwnChoices };
+  return { makeOwnChoices, randomlyPlaceShips };
 };
 
 // const computer = Object.assign(player("computer"), computerMover());
