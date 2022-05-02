@@ -8,6 +8,9 @@ const newBoard = (ownerName) => {
     submarine: 3,
     destroyer: 2,
   };
+  const getShipLengths = () => {
+    return shipLengths;
+  };
   const shipyard = {};
   const shipLocations = {};
   const shots = [];
@@ -87,6 +90,7 @@ const newBoard = (ownerName) => {
     getOwnerName,
     getShipLocations,
     nextShip,
+    getShipLengths,
   };
 };
 
