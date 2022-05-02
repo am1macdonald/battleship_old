@@ -30,11 +30,30 @@ const computerMover = () => {
   };
 
   const randomlyPlaceShips = (board) => {
-    board.placeShip("carrier", "1-1", "1-5");
-    board.placeShip("battleship", "2-1", "2-4");
-    board.placeShip("cruiser", "3-2", "3-4");
-    board.placeShip("submarine", "4-1", "4-3");
-    board.placeShip("destroyer", "6-2", "6-3");
+    if (board.nextShip() === "setup complete") {
+      return;
+    }
+    const nextShip = board.nextShip();
+    const chooseAxis = Math.floor(Math.random() * 2); // 0 for x; 1 for y
+    const mainAxisCoord = Math.floor(Math.random() * 10) + 1;
+    const shipStartCoord = Math.floor(Math.random() * 10) + 1;
+    const shipEndCoord = shipStartCoord + board.getShipLengths()[nextShip] - 1;
+
+    if (chooseAxis) {
+      board.placeShip(
+        nextShip,
+        `${shipStartCoord}-${mainAxisCoord}`,
+        `${shipEndCoord}-${mainAxisCoord}`
+      );
+    } else if (!chooseAxis) {
+      board.placeShip(
+        nextShip,
+        `${mainAxisCoord}-${shipStartCoord}`,
+        `${mainAxisCoord}-${shipEndCoord}`
+      );
+    }
+    console.log(chooseAxis, mainAxisCoord, shipStartCoord, shipEndCoord);
+    randomlyPlaceShips(board);
   };
 
   return { makeOwnChoices, randomlyPlaceShips };
