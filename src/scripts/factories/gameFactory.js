@@ -26,6 +26,7 @@ const newGame = (playerOneName, playerTwoName) => {
 
   if (playerTwo.getName() === "Computer Player") {
     playerTwo.randomlyPlaceShips(playerTwoBoard);
+    console.log(playerTwoBoard.getShipLocations());
   }
   let turn = "playerOne";
   const toggleTurn = () => {
@@ -84,7 +85,5 @@ const newGame = (playerOneName, playerTwoName) => {
     eventManager,
   };
 };
-
-newGame("joe", null);
 
 export default newGame;

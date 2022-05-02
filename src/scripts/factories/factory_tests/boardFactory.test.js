@@ -7,15 +7,26 @@ it("returns an object", () => {
 it("returns a shipyard's contents when  a ship is placed", () => {
   const gameboard = newBoard();
 
-  expect(newBoard().placeShip("carrier", '2-1', '2-5')).toHaveProperty('carrier');
-
+  expect(newBoard().placeShip("carrier", '2-1', '2-5')).toMatchObject(
+    {
+      '2-1': false,
+      '2-2': false,
+      '2-3': false,
+      '2-4': false,
+      '2-5': false,
+    }
+  );
 });
 
 it("returns a shipyard's contents when  a ship is placed", () => {
   const gameboard = newBoard();
 
-  expect(newBoard().placeShip("destroyer", '2-1', '2-5')).toHaveProperty('destroyer');
-  
+  expect(newBoard().placeShip("destroyer", '2-1', '2-2')).toMatchObject(
+    {
+      '2-1': false,
+      '2-2': false
+    }
+  );  
 });
 
 it("returns 'hit' when a ship has been hit", () => {
