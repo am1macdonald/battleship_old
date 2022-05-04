@@ -29,18 +29,22 @@ const newBoard = (ownerName) => {
   };
 
   function placeShip(name, start, end) {
-    const temp = newShip(name, shipLengths[name], start, end);
-    const map = temp.getHitMap();
-    for (const key in map) {
-      if (shipLocations.hasOwnProperty(key)) {
-        throw new Error("space already occupied");
+    try {
+      const temp = newShip(name, shipLengths[name], start, end);
+      const map = temp.getHitMap();
+      for (const key in map) {
+        if (shipLocations.hasOwnProperty(key)) {
+          throw new Error("space already occupied");
+        }
       }
+      shipyard[name] = temp;
+      for (const key in map) {
+        shipLocations[key] = name;
+      }
+      return map;
+    } catch (err) {
+      console.log(err);
     }
-    shipyard[name] = temp;
-    for (const key in map) {
-      shipLocations[key] = name;
-    }
-    return map;
   }
 
   function recieveAttack(location) {
