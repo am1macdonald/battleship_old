@@ -129,4 +129,8 @@ const renderShip = (coords) => {
   console.log(Object.keys(coords));
 };
 
-export { playerDataEntry, renderBoard, gameArea, shipDrawer };
+const refreshBoards = (gameObj) => {
+  console.log(gameObj);
+};
+
+export { playerDataEntry, renderBoard, gameArea, shipDrawer, refreshBoards };

@@ -6,16 +6,6 @@ const newGame = (playerOneName, playerTwoName) => {
   const getStage = () => {
     return stage;
   };
-  const nextGameStage = () => {
-    if (stage === "setup") {
-      if (
-        playerOneBoard.nextShip() === "setup complete" &&
-        playerTwoBoard.nextShip() === "setup complete"
-      )
-        stage = "gameplay";
-    }
-    return stage;
-  };
 
   const playerOne = playerOneName ? player(playerOneName) : null;
   const playerTwo = playerTwoName
@@ -24,9 +14,14 @@ const newGame = (playerOneName, playerTwoName) => {
   const playerOneBoard = newBoard(playerOne);
   const playerTwoBoard = newBoard(playerTwo);
 
+  const getBoards = () => {
+    return {
+      playerOneBoard,
+      playerTwoBoard,
+    };
+  };
   if (playerTwo.getName() === "Computer Player") {
     playerTwo.randomlyPlaceShips(playerTwoBoard);
-    console.log(playerTwoBoard.getShipLocations());
   }
   let turn = "playerOne";
   const toggleTurn = () => {
@@ -44,9 +39,21 @@ const newGame = (playerOneName, playerTwoName) => {
       console.log(result);
     };
   };
+  const nextGameStage = () => {
+    if (stage === "setup") {
+      if (
+        playerOneBoard.nextShip() === "setup complete" &&
+        playerTwoBoard.nextShip() === "setup complete"
+      )
+        stage = "gameplay";
+    }
+    return stage;
+  };
   const eventManager = (data) => {
     if (stage === "setup") {
       if (playerOneBoard.nextShip() === "setup complete") {
+        console.log("Player One: ", playerOneBoard.getShipLocations());
+        console.log("Player Two: ", playerTwoBoard.getShipLocations());
         nextGameStage();
         return;
       }
@@ -62,7 +69,7 @@ const newGame = (playerOneName, playerTwoName) => {
         }
       }
       curryTemp = setupCurry(data.coord, playerOneBoard);
-      console.log(curryTemp);
+      // console.log(curryTemp);
     }
   };
 
@@ -76,8 +83,7 @@ const newGame = (playerOneName, playerTwoName) => {
   return {
     playerOne,
     playerTwo,
-    playerOneBoard,
-    playerTwoBoard,
+    getBoards,
     toggleTurn,
     next,
     getStage,

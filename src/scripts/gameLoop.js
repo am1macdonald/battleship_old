@@ -1,4 +1,4 @@
-import { gameArea, playerDataEntry } from "./DOMControls";
+import { gameArea, refreshBoards } from "./DOMControls";
 import newGame from "./factories/gameFactory";
 
 let game;
@@ -36,6 +36,7 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
           coord: square.dataset.coord,
         };
         game.eventManager(data);
+        refreshBoards(game);
       });
     });
     console.log("player attack selection bound");
