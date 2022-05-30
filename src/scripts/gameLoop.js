@@ -9,21 +9,22 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
     ...document.querySelector(`[data-owner="${playerOneName}"]`).children,
   ];
   const playerShipDrawer = document.querySelectorAll(`[data-ship]`);
-  console.log(playerShipDrawer);
   const playerTwoSquares = [
     ...document.querySelector('[data-owner="Player Two"]').children,
   ];
 
   // binds event listeners for player ship setup
+  const setupSquares = (e) => {
+    const data = {
+      owner: e.target.parentElement.dataset.owner,
+      coord: e.target.dataset.coord,
+    };
+    game.eventManager(data);
+    refreshBoards(game);
+  };
   if (game.getStage() === "setup") {
     playerOneSquares.forEach((square) => {
-      square.addEventListener("click", () => {
-        const data = {
-          owner: square.parentElement.dataset.owner,
-          coord: square.dataset.coord,
-        };
-        game.eventManager(data);
-      });
+      square.addEventListener("click", setupSquares);
     });
     console.log("player selection bound");
 
@@ -36,7 +37,6 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
           coord: square.dataset.coord,
         };
         game.eventManager(data);
-        refreshBoards(game);
       });
     });
     console.log("player attack selection bound");
@@ -46,6 +46,9 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
     const result = game.nextGameStage();
     if (result === "gameplay") {
       console.log(result);
+      playerOneSquares.forEach((square) => {
+        square.removeEventListener("click", setupSquares);
+      });
     } else console.log("finish placing ships");
   });
 };
