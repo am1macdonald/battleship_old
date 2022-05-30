@@ -1,3 +1,13 @@
+const cache = {};
+
+function importAll(r) {
+  r.keys().forEach((key) => (cache[key] = r(key)));
+}
+
+importAll(require.context("../assets/icons", true, /\.png$/));
+
+console.log(cache);
+
 const body = document.querySelector("body");
 const content = document.getElementById("content");
 
@@ -130,7 +140,35 @@ const renderShip = (coords) => {
 };
 
 const refreshBoards = (gameObj) => {
-  console.log(gameObj);
+  const playerOneShips = gameObj.getBoards().playerOneBoard.getShipLocations();
+
+  const playerOneBoard = [
+    ...document.getElementsByClassName("gameboard")[0].childNodes,
+  ];
+
+  const playerTwoShips = gameObj.getBoards().playerTwoBoard.getShipLocations();
+
+  const playerTwoBoard = [
+    ...document.getElementsByClassName("gameboard")[1].childNodes,
+  ];
+
+  console.log(playerTwoShips);
+  console.log(playerTwoBoard);
+
+  const renderIcon = (ships, square) => {
+    if (ships.hasOwnProperty(square.dataset.coord)) {
+      console.log(square.dataset.coord);
+      square.innerHTML = "<div class='stamp-div'></div>";
+    }
+  };
+  const renderMapTwo = {};
+
+  for (const square of playerTwoBoard) {
+    renderIcon(playerTwoShips, square);
+  }
+  for (const square of playerOneBoard) {
+    renderIcon(playerOneShips, square);
+  }
 };
 
 export { playerDataEntry, renderBoard, gameArea, shipDrawer, refreshBoards };
