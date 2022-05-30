@@ -36,7 +36,7 @@ const newGame = (playerOneName, playerTwoName) => {
   const setupCurry = (coordOne, board) => {
     return function (coordTwo) {
       const result = board.placeShip(board.nextShip(), coordOne, coordTwo);
-      console.log(result);
+      // console.log(result);
     };
   };
   const nextGameStage = () => {
@@ -52,14 +52,14 @@ const newGame = (playerOneName, playerTwoName) => {
   const eventManager = (data) => {
     if (stage === "setup") {
       if (playerOneBoard.nextShip() === "setup complete") {
-        console.log("Player One: ", playerOneBoard.getShipLocations());
-        console.log("Player Two: ", playerTwoBoard.getShipLocations());
+        // console.log("Player One: ", playerOneBoard.getShipLocations());
+        // console.log("Player Two: ", playerTwoBoard.getShipLocations());
         nextGameStage();
         return;
       }
       if (curryTemp !== undefined) {
         try {
-          console.log(curryTemp(data.coord));
+          curryTemp(data.coord);
           curryTemp = undefined;
           return;
         } catch (error) {
