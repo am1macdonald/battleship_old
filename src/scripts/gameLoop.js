@@ -26,7 +26,6 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
     playerOneSquares.forEach((square) => {
       square.addEventListener("click", setupSquares);
     });
-    // console.log("player selection bound");
 
     // binds event listeners for player to make attacks
   } else if (game.getStage() === "gameplay") {
@@ -41,19 +40,20 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
           coord: square.dataset.coord,
         };
         game.eventManager(data);
-        // console.log(data);
+
+        refreshBoards(game);
       });
     });
   };
-  const playerOneready = document.getElementById("player-one-ready");
-  playerOneready.addEventListener("click", () => {
+  const playerOneReady = document.getElementById("player-one-ready");
+  playerOneReady.addEventListener("click", () => {
     const result = game.nextGameStage();
     if (result === "gameplay") {
-      // console.log(result);
       playerOneSquares.forEach((square) => {
         square.removeEventListener("click", setupSquares);
       });
       bindGameplaySquares();
+      playerOneReady.disabled = true;
     } else console.log("finish placing ships");
   });
 };
