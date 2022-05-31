@@ -6,6 +6,8 @@ function importAll(r) {
 
 importAll(require.context("../assets/icons", true, /\.png$/));
 
+console.log(cache);
+
 const body = document.querySelector("body");
 const content = document.getElementById("content");
 
@@ -134,34 +136,49 @@ const gameArea = (playerOneName, playerTwoName) => {
 };
 
 const refreshBoards = (gameObj) => {
-  const playerOneShips = gameObj.getBoards().playerOneBoard.getShipLocations();
+  for (const keys in cache) {
+    // console.log(keys);
+  }
+  const { playerOneBoard } = gameObj.getBoards();
+  const playerOneShips = playerOneBoard.getShipLocations();
+  const playerOneShots = playerOneBoard.getShots();
 
-  const playerOneBoard = [
+  const playerOneBoardNodes = [
     ...document.getElementsByClassName("gameboard")[0].childNodes,
   ];
 
-  const playerTwoShips = gameObj.getBoards().playerTwoBoard.getShipLocations();
+  const { playerTwoBoard } = gameObj.getBoards();
+  const playerTwoShips = playerTwoBoard.getShipLocations();
+  const playerTwoShots = playerTwoBoard.getShots();
 
-  const playerTwoBoard = [
+  const playerTwoBoardNodes = [
     ...document.getElementsByClassName("gameboard")[1].childNodes,
   ];
 
-  // console.log(playerTwoShips);
-  // console.log(playerTwoBoard);
-
-  const renderIcon = (ships, square) => {
+  const renderShip = (ships, square) => {
     if (ships.hasOwnProperty(square.dataset.coord)) {
-      // console.log(square.dataset.coord);
       square.innerHTML = "<div class='stamp-div'></div>";
+      // square.innerHTML = `<img class='stamp' src = '${cache["./dash.png"]}'/>`;
     }
   };
-  const renderMapTwo = {};
+  const renderHit = (shotLocations, shipLocations, square) => {
+    const coordinate = square.dataset.coord;
+    if (shotLocations.includes(coordinate)) {
+      if (shipLocations.hasOwnProperty(coordinate)) {
+        square.innerHTML = `<img class='stamp' src='${cache["./orange-x.png"]}'/>`;
+      } else {
+        square.innerHTML = `<img class='stamp' src='${cache["./dash.png"]}'/>`;
+      }
+    }
+  };
 
-  for (const square of playerTwoBoard) {
-    renderIcon(playerTwoShips, square);
+  for (const square of playerTwoBoardNodes) {
+    // renderShip(playerTwoShips, square);
+    renderHit(playerTwoShots, playerTwoShips, square);
   }
-  for (const square of playerOneBoard) {
-    renderIcon(playerOneShips, square);
+  for (const square of playerOneBoardNodes) {
+    renderShip(playerOneShips, square);
+    renderHit(playerOneShots, playerOneShips, square);
   }
 };
 
