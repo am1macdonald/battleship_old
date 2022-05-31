@@ -43,7 +43,7 @@ const newBoard = (ownerName) => {
       }
       return map;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 

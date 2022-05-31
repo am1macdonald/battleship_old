@@ -6,8 +6,6 @@ function importAll(r) {
 
 importAll(require.context("../assets/icons", true, /\.png$/));
 
-console.log(cache);
-
 const body = document.querySelector("body");
 const content = document.getElementById("content");
 
@@ -135,10 +133,6 @@ const gameArea = (playerOneName, playerTwoName) => {
   };
 };
 
-const renderShip = (coords) => {
-  console.log(Object.keys(coords));
-};
-
 const refreshBoards = (gameObj) => {
   const playerOneShips = gameObj.getBoards().playerOneBoard.getShipLocations();
 
@@ -152,12 +146,12 @@ const refreshBoards = (gameObj) => {
     ...document.getElementsByClassName("gameboard")[1].childNodes,
   ];
 
-  console.log(playerTwoShips);
-  console.log(playerTwoBoard);
+  // console.log(playerTwoShips);
+  // console.log(playerTwoBoard);
 
   const renderIcon = (ships, square) => {
     if (ships.hasOwnProperty(square.dataset.coord)) {
-      console.log(square.dataset.coord);
+      // console.log(square.dataset.coord);
       square.innerHTML = "<div class='stamp-div'></div>";
     }
   };

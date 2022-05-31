@@ -52,7 +52,7 @@ const computerMover = () => {
         `${mainAxisCoord}-${shipEndCoord}`
       );
     }
-    console.log(chooseAxis, mainAxisCoord, shipStartCoord, shipEndCoord);
+    // console.log(chooseAxis, mainAxisCoord, shipStartCoord, shipEndCoord);
     randomlyPlaceShips(board);
   };
 

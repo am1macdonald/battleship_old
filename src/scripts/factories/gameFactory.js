@@ -70,6 +70,7 @@ const newGame = (playerOneName, playerTwoName) => {
       }
       curryTemp = setupCurry(data.coord, playerOneBoard);
       // console.log(curryTemp);
+    } else if (stage === "gameplay") {
     }
   };
 
