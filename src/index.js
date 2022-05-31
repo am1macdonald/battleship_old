@@ -1,7 +1,7 @@
 import "./stylesheets/reset.css";
 import "./stylesheets/style.sass";
 import "./assets/sakura-_LHf-WzBYpo-unsplash.jpg";
-import { playerDataEntry } from "./scripts/DOMControls";
+import { makeAlert, playerDataEntry } from "./scripts/DOMControls";
 import startGame from "./scripts/gameLoop";
 
 const onLoad = (() => {
@@ -15,6 +15,7 @@ const onLoad = (() => {
     startGame(input.value);
     dataEntry.overlay.remove();
     e.target.removeEventListener("click", handleClick);
+    makeAlert("click to place ships");
   }
 
   dataEntry.button.addEventListener("click", handleClick);
