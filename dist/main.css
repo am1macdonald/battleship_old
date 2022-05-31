@@ -217,6 +217,11 @@ footer {
   box-shadow: 0 0 0 2px;
 }
 
+.stamp {
+  max-width: 90%;
+  height: auto;
+}
+
 .stamp-div {
   width: 40px;
   height: 40px;
