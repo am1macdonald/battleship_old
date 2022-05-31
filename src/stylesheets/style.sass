@@ -96,8 +96,42 @@ footer
   border-radius: 50%
   background-color: black 
 
+.alert-container
+  position: fixed
+  height: 100vh
+  width: 100vw
+  top: 0
+  left: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  animation: fade-alert 3s 1
+  animation-fill-mode: forwards
+  animation-delay: 1s
 
+  div
+    position: relative
+    top: -25%
+    display: flex
+    justify-content: center
+    align-items: center
 
+    width: auto
+    height: auto
+    padding: 1rem 1rem
+
+    background-color: #fff
+
+    h4
+      font-family: monospace
+      font-size: 5vh
+
+  @keyframes fade-alert  
+    from 
+      opacity: 1
+    to
+      opacity: 0
+  
 // id
 
 #player-information

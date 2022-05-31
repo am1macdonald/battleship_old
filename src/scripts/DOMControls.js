@@ -94,6 +94,26 @@ const shipDrawer = (parent) => {
   return { container, childRefs };
 };
 
+const makeAlert = (alert) => {
+  const container = document.createElement("div");
+  container.classList.add("alert-container");
+
+  const textBox = document.createElement("div");
+  textBox.classList.add("alert-textbox");
+
+  const text = document.createElement("h4");
+  text.classList.add("alert-text");
+  text.innerHTML = `${alert}`;
+
+  textBox.appendChild(text);
+  container.appendChild(textBox);
+  content.appendChild(container);
+
+  setTimeout(() => {
+    container.remove();
+  }, 4000);
+};
+
 const gameArea = (playerOneName, playerTwoName) => {
   const container = document.createElement("div");
   container.id = "game-area";
@@ -182,4 +202,11 @@ const refreshBoards = (gameObj) => {
   }
 };
 
-export { playerDataEntry, renderBoard, gameArea, shipDrawer, refreshBoards };
+export {
+  playerDataEntry,
+  renderBoard,
+  gameArea,
+  shipDrawer,
+  refreshBoards,
+  makeAlert,
+};

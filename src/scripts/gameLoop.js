@@ -1,4 +1,4 @@
-import { gameArea, refreshBoards } from "./DOMControls";
+import { gameArea, makeAlert, refreshBoards } from "./DOMControls";
 import newGame from "./factories/gameFactory";
 
 let game;
@@ -54,7 +54,9 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
       });
       bindGameplaySquares();
       playerOneReady.disabled = true;
-    } else console.log("finish placing ships");
+    } else {
+      makeAlert("finish placing ships");
+    }
   });
 };
 
