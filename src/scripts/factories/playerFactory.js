@@ -19,12 +19,12 @@ const player = (name) => {
 };
 
 const computerMover = () => {
-  const makeOwnChoices = (board) => {
+  const makeOwnChoices = (shotMap) => {
     const coord = `${Math.floor(Math.random() * 10) + 1}-${
       Math.floor(Math.random() * 10) + 1
     }`;
-    if (board.includes(coord)) {
-      makeOwnChoices(board);
+    if (shotMap.includes(coord)) {
+      makeOwnChoices(shotMap);
     }
     return coord;
   };
