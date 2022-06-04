@@ -111,7 +111,7 @@ const makeAlert = (alert) => {
 
   setTimeout(() => {
     container.remove();
-  }, 4000);
+  }, 2000);
 };
 
 const gameArea = (playerOneName, playerTwoName) => {

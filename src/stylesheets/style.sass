@@ -105,7 +105,7 @@ footer
   display: flex
   justify-content: center
   align-items: center
-  animation: fade-alert 3s 1
+  animation: fade-alert 1s 1
   animation-fill-mode: forwards
   animation-delay: 1s
 
@@ -121,6 +121,8 @@ footer
     padding: 1rem 1rem
 
     background-color: #fff
+    border-radius: 2px
+    border: double black
 
     h4
       font-family: monospace
@@ -128,6 +130,8 @@ footer
 
   @keyframes fade-alert  
     from 
+      opacity: 1
+    50%
       opacity: 1
     to
       opacity: 0
