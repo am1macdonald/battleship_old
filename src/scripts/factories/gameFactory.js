@@ -32,12 +32,6 @@ const newGame = (playerOneName, playerTwoName) => {
     }
   };
 
-  let curryTemp;
-  const setupCurry = (coordOne, board) => {
-    return function (coordTwo) {
-      const result = board.placeShip(board.nextShip(), coordOne, coordTwo);
-    };
-  };
   const nextGameStage = () => {
     if (stage === "setup") {
       if (
@@ -60,34 +54,6 @@ const newGame = (playerOneName, playerTwoName) => {
       computerTurn();
     }
   };
-  const eventManager = (data) => {
-    if (stage === "setup") {
-      if (playerOneBoard.nextShip() === "setup complete") {
-        return;
-      }
-      if (curryTemp !== undefined) {
-        try {
-          curryTemp(data.coord);
-          curryTemp = undefined;
-          return;
-        } catch (error) {
-          console.error(error);
-          curryTemp = undefined;
-          return;
-        }
-      }
-      curryTemp = setupCurry(data.coord, playerOneBoard);
-    } else if (stage === "gameplay") {
-      const playerResult = playerTwoBoard.recieveAttack(data.coord);
-
-      if (playerResult !== "miss") {
-        playerTwoBoard.isFleetSunk();
-      } else if (playerResult === "miss") {
-        computerTurn();
-        playerOneBoard.isFleetSunk();
-      }
-    }
-  };
 
   const next = () => {
     if (stage === "setup") {
@@ -104,7 +70,7 @@ const newGame = (playerOneName, playerTwoName) => {
     next,
     getStage,
     nextGameStage,
-    eventManager,
+
     computerTurn,
   };
 };

@@ -3,6 +3,45 @@ import newGame from "./factories/gameFactory";
 
 let game;
 
+let curryTemp;
+
+const setupCurry = (coordOne, board) => {
+  return function (coordTwo) {
+    const result = board.placeShip(board.nextShip(), coordOne, coordTwo);
+  };
+};
+
+const eventManager = (data) => {
+  const { playerOneBoard } = game.getBoards();
+  const { playerTwoBoard } = game.getBoards();
+  if (game.getStage() === "setup") {
+    if (playerOneBoard.nextShip() === "setup complete") {
+      return;
+    }
+    if (curryTemp !== undefined) {
+      try {
+        curryTemp(data.coord);
+        curryTemp = undefined;
+        return;
+      } catch (error) {
+        console.error(error);
+        curryTemp = undefined;
+        return;
+      }
+    }
+    curryTemp = setupCurry(data.coord, playerOneBoard);
+  } else if (game.getStage() === "gameplay") {
+    const playerResult = playerTwoBoard.recieveAttack(data.coord);
+
+    if (playerResult !== "miss") {
+      playerTwoBoard.isFleetSunk();
+    } else if (playerResult === "miss") {
+      game.computerTurn();
+      playerOneBoard.isFleetSunk();
+    }
+  }
+};
+
 // only useful until two player games are possible
 const bindListeners = (playerOneName, playerTwoName = null) => {
   const playerOneSquares = [
@@ -19,7 +58,7 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
       owner: e.target.parentElement.dataset.owner,
       coord: e.target.dataset.coord,
     };
-    game.eventManager(data);
+    eventManager(data);
     refreshBoards(game);
   };
   if (game.getStage() === "setup") {
@@ -39,7 +78,7 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
           owner: square.parentElement.dataset.owner,
           coord: square.dataset.coord,
         };
-        game.eventManager(data);
+        eventManager(data);
 
         refreshBoards(game);
       });
