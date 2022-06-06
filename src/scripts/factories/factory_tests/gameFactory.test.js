@@ -8,5 +8,5 @@ test("returns a new game", () => {
 test('has a gameboards', () => {
   const game = newGame('joe', 'blow')
 
-  expect(game).toHaveProperty('playerOneBoard')
+  expect(game.getBoards()).toHaveProperty('playerOneBoard')
 })

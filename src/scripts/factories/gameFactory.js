@@ -42,16 +42,30 @@ const newGame = (playerOneName, playerTwoName) => {
     }
     return stage;
   };
-  const computerTurn = () => {
+  const computerTurn = async () => {
     const choice = playerTwo.makeOwnChoices(playerOneBoard.getShots());
+
+    console.log("computer choice: ", choice);
     try {
       const computerResult = playerOneBoard.recieveAttack(choice);
-
-      if (computerResult !== "miss") {
-        computerTurn();
+      console.log("computer Result: ", computerResult);
+      if (computerResult === "miss") {
+        return computerResult;
       }
+      if (computerResult === "hit") {
+        playerTwo.confirmLastHit(choice);
+      }
+      if (computerResult === "sunk") {
+        playerTwo.confirmLastHit("");
+      }
+
+      setTimeout(computerTurn, 1000);
+      return computerResult;
     } catch (err) {
-      computerTurn();
+      console.log(err);
+      const computerResult = computerTurn();
+
+      return computerResult;
     }
   };
 
@@ -70,7 +84,6 @@ const newGame = (playerOneName, playerTwoName) => {
     next,
     getStage,
     nextGameStage,
-
     computerTurn,
   };
 };

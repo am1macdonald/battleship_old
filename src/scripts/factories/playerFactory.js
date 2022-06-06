@@ -19,7 +19,41 @@ const player = (name) => {
 };
 
 const computerMover = () => {
+  let lastHit = "";
+  const confirmLastHit = (coord) => {
+    lastHit = coord;
+  };
   const makeOwnChoices = (shotMap) => {
+    // let coord;
+    // if (lastHit.length > 0) {
+    //   const chooseAxis = Math.floor(Math.random() * 2);
+    //   const plusOrMinus = Math.floor(Math.random() * 2);
+    //   const splitCoord = lastHit.split("-").map((num) => {
+    //     return parseInt(num);
+    //   }); // sets [x, y]
+
+    //   if (plusOrMinus) {
+    //     if (splitCoord[chooseAxis] === 10) {
+    //       lastHit = "";
+    //       makeOwnChoices(shotMap);
+    //       return;
+    //     }
+    //     splitCoord[chooseAxis] += 1;
+    //   } else {
+    //     if (splitCoord[chooseAxis] === 1) {
+    //       lastHit = "";
+    //       makeOwnChoices(shotMap);
+    //       return;
+    //     }
+    //     splitCoord[chooseAxis] -= 1;
+    //   }
+
+    //   coord = splitCoord.join("-");
+    // } else {
+    //   coord = `${Math.floor(Math.random() * 10) + 1}-${
+    //     Math.floor(Math.random() * 10) + 1
+    //   }`;
+    // }
     const coord = `${Math.floor(Math.random() * 10) + 1}-${
       Math.floor(Math.random() * 10) + 1
     }`;
@@ -56,7 +90,7 @@ const computerMover = () => {
     randomlyPlaceShips(board);
   };
 
-  return { makeOwnChoices, randomlyPlaceShips };
+  return { makeOwnChoices, randomlyPlaceShips, confirmLastHit };
 };
 
 // const computer = Object.assign(player("computer"), computerMover());

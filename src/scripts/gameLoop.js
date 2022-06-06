@@ -1,4 +1,9 @@
-import { gameArea, makeAlert, refreshBoards } from "./DOMControls";
+import {
+  gameArea,
+  highlightShip,
+  makeAlert,
+  refreshBoards,
+} from "./DOMControls";
 import newGame from "./factories/gameFactory";
 
 let game;
@@ -36,7 +41,9 @@ const eventManager = (data) => {
     if (playerResult !== "miss") {
       playerTwoBoard.isFleetSunk();
     } else if (playerResult === "miss") {
-      game.computerTurn();
+      const computerResult = game.computerTurn();
+
+      computerResult.then(refreshBoards(game));
       playerOneBoard.isFleetSunk();
     }
   }
@@ -54,12 +61,14 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
 
   // binds event listeners for player ship setup
   const setupSquares = (e) => {
+    const currentShip = game.getBoards().playerOneBoard.nextShip();
     const data = {
       owner: e.target.parentElement.dataset.owner,
       coord: e.target.dataset.coord,
     };
     eventManager(data);
     refreshBoards(game);
+    highlightShip(currentShip);
   };
   if (game.getStage() === "setup") {
     playerOneSquares.forEach((square) => {
