@@ -15,7 +15,7 @@ const onLoad = (() => {
     startGame(input.value);
     dataEntry.overlay.remove();
     e.target.removeEventListener("click", handleClick);
-    makeAlert("click to place ships");
+    makeAlert("click to place ships,</br> then press 'Start Game'");
   }
 
   dataEntry.button.addEventListener("click", handleClick);
