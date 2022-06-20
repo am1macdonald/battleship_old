@@ -31,6 +31,9 @@ const newGame = (playerOneName, playerTwoName) => {
       turn = "playerOne";
     }
   };
+  const getTurn = () => {
+    return turn;
+  };
 
   const nextGameStage = () => {
     if (stage === "setup") {
@@ -45,10 +48,8 @@ const newGame = (playerOneName, playerTwoName) => {
   const computerTurn = async () => {
     const choice = playerTwo.makeOwnChoices(playerOneBoard.getShots());
 
-    console.log("computer choice: ", choice);
     try {
       const computerResult = playerOneBoard.recieveAttack(choice);
-      console.log("computer Result: ", computerResult);
       if (computerResult === "miss") {
         return computerResult;
       }
@@ -59,10 +60,10 @@ const newGame = (playerOneName, playerTwoName) => {
         playerTwo.confirmLastHit("");
       }
 
-      setTimeout(computerTurn, 1000);
+      computerTurn();
       return computerResult;
     } catch (err) {
-      console.log(err);
+      console.error(err);
       const computerResult = computerTurn();
 
       return computerResult;
@@ -81,6 +82,7 @@ const newGame = (playerOneName, playerTwoName) => {
     playerTwo,
     getBoards,
     toggleTurn,
+    getTurn,
     next,
     getStage,
     nextGameStage,

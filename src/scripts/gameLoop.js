@@ -36,6 +36,9 @@ const eventManager = (data) => {
     }
     curryTemp = setupCurry(data.coord, playerOneBoard);
   } else if (game.getStage() === "gameplay") {
+    if (game.getTurn() !== "playerOne") {
+      return;
+    }
     const playerResult = playerTwoBoard.recieveAttack(data.coord);
 
     if (playerResult !== "miss") {
@@ -61,14 +64,12 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
 
   // binds event listeners for player ship setup
   const setupSquares = (e) => {
-    const currentShip = game.getBoards().playerOneBoard.nextShip();
     const data = {
       owner: e.target.parentElement.dataset.owner,
       coord: e.target.dataset.coord,
     };
     eventManager(data);
     refreshBoards(game);
-    highlightShip(currentShip);
   };
   if (game.getStage() === "setup") {
     playerOneSquares.forEach((square) => {
@@ -94,7 +95,10 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
     });
   };
   const playerOneReady = document.getElementById("player-one-ready");
+
   playerOneReady.addEventListener("click", () => {
+    const currentShip = game.getBoards().playerOneBoard.nextShip();
+
     const result = game.nextGameStage();
     if (result === "gameplay") {
       playerOneSquares.forEach((square) => {
@@ -102,6 +106,8 @@ const bindListeners = (playerOneName, playerTwoName = null) => {
       });
       bindGameplaySquares();
       playerOneReady.disabled = true;
+
+      highlightShip(currentShip);
     } else {
       makeAlert("finish placing ships");
     }

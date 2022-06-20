@@ -86,12 +86,28 @@ const shipDrawer = (parent) => {
     shipDiv.id = `${ship}-selection`;
     shipDiv.dataset.ship = `${ship}`;
     shipDiv.innerHTML = `${ship}`;
+    if (ship === "carrier") {
+      shipDiv.classList.add("highlighted-ship");
+    }
     container.appendChild(shipDiv);
   });
 
   parent.appendChild(container);
   const childRefs = [...container.children];
   return { container, childRefs };
+};
+
+const highlightShip = (ship) => {
+  const allShips = [...document.querySelectorAll("[data-ship]")];
+  allShips.forEach((ele) => {
+    ele.removeAttribute("class");
+  });
+  if (ship === "setup complete") {
+    return;
+  }
+
+  const shipToHighlight = document.querySelector(`[data-ship='${ship}']`);
+  shipToHighlight.classList.add("highlighted-ship");
 };
 
 const makeAlert = (alert) => {
@@ -128,7 +144,7 @@ const gameArea = (playerOneName, playerTwoName) => {
   playerOneBoard.dataset.owner = playerOneName;
   shipDrawer(playerOneSide);
   const playerOneReady = document.createElement("button");
-  playerOneReady.innerHTML = "READY";
+  playerOneReady.innerHTML = "Start Game";
   playerOneReady.id = "player-one-ready";
   playerOneSide.appendChild(playerOneReady);
 
@@ -209,4 +225,5 @@ export {
   shipDrawer,
   refreshBoards,
   makeAlert,
+  highlightShip,
 };
