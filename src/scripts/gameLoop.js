@@ -42,11 +42,12 @@ const eventManager = (data) => {
     const playerResult = playerTwoBoard.recieveAttack(data.coord);
 
     if (playerResult !== "miss") {
-      playerTwoBoard.isFleetSunk();
+      console.log(playerTwoBoard.isFleetSunk());
     } else if (playerResult === "miss") {
+      game.toggleTurn();
       const computerResult = game.computerTurn();
 
-      computerResult.then(refreshBoards(game));
+      refreshBoards(game);
       playerOneBoard.isFleetSunk();
     }
   }
@@ -118,6 +119,9 @@ const startGame = (playerOneName, playerTwoName = null) => {
   gameArea(playerOneName, "Player Two");
   game = newGame(playerOneName, playerTwoName);
   bindListeners(playerOneName, playerTwoName);
+  setInterval(() => {
+    refreshBoards(game);
+  }, 250);
 };
 
 export default startGame;

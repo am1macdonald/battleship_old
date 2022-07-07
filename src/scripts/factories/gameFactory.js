@@ -45,29 +45,34 @@ const newGame = (playerOneName, playerTwoName) => {
     }
     return stage;
   };
-  const computerTurn = async () => {
-    const choice = playerTwo.makeOwnChoices(playerOneBoard.getShots());
+  const computerTurn = () => {
+    setTimeout(() => {
+      const choice = playerTwo.makeOwnChoices(playerOneBoard.getShots());
 
-    try {
-      const computerResult = playerOneBoard.recieveAttack(choice);
-      if (computerResult === "miss") {
+      try {
+        const computerResult = playerOneBoard.recieveAttack(choice);
+        if (computerResult === "miss") {
+          toggleTurn();
+          return computerResult;
+        }
+        if (computerResult === "hit") {
+          playerTwo.confirmLastHit(choice);
+        }
+        if (computerResult === "sunk") {
+          playerTwo.confirmLastHit("");
+        }
+
+        computerTurn();
+        toggleTurn();
+        return computerResult;
+      } catch (err) {
+        console.error(err);
+        const computerResult = computerTurn();
+
+        toggleTurn();
         return computerResult;
       }
-      if (computerResult === "hit") {
-        playerTwo.confirmLastHit(choice);
-      }
-      if (computerResult === "sunk") {
-        playerTwo.confirmLastHit("");
-      }
-
-      computerTurn();
-      return computerResult;
-    } catch (err) {
-      console.error(err);
-      const computerResult = computerTurn();
-
-      return computerResult;
-    }
+    }, 500);
   };
 
   const next = () => {
